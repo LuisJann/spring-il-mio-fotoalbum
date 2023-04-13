@@ -80,4 +80,19 @@ public class PhotoController {
             throw new ResponseStatusException(HttpStatus.NOT_FOUND, "Photo with id" + id + " not found");
         }
     }
+
+    @GetMapping("/photos/delete/{id}")
+    public String delete(@PathVariable Integer id, RedirectAttributes redirectAttributes){
+        try {
+            boolean check = photoService.deleteById(id);
+            if (check){
+                redirectAttributes.addFlashAttribute("message", "Photo with id:" + id +" delete");
+            }else{
+                redirectAttributes.addFlashAttribute("message", "Unable to delete photo whit id: " + id);
+            }
+        }catch (Exception e){
+            throw new ResponseStatusException(HttpStatus.NOT_FOUND);
+        }
+        return "redirect:/";
+    }
 }

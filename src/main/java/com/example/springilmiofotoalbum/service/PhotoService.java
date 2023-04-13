@@ -45,4 +45,13 @@ public class PhotoService {
         photoToUpdate.setIsVisible(formPhoto.getIsVisible());
         return photoRepository.save(photoToUpdate);
     }
+
+    public boolean deleteById(Integer id){
+        try{
+            photoRepository.deleteById(id);
+            return true;
+        }catch (Exception e){
+            return false;
+        }
+    }
 }
