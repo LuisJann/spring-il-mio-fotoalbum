@@ -36,4 +36,13 @@ public class PhotoService {
             throw new RuntimeException("Foto non trovata");
         }
     }
+
+    public Photo updatePhoto(Photo formPhoto, Integer id){
+        Photo photoToUpdate = getById(id);
+        photoToUpdate.setTitle(formPhoto.getTitle());
+        photoToUpdate.setDescription(formPhoto.getDescription());
+        photoToUpdate.setUrl(formPhoto.getUrl());
+        photoToUpdate.setIsVisible(formPhoto.getIsVisible());
+        return photoRepository.save(photoToUpdate);
+    }
 }

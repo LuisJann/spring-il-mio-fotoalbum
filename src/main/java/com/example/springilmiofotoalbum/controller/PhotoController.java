@@ -12,6 +12,7 @@ import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.server.ResponseStatusException;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import java.util.List;
 import java.util.Optional;
@@ -56,6 +57,27 @@ public class PhotoController {
         }else {
             photoService.createPhoto(formPhoto);
             return "redirect:/";
+        }
+    }
+
+    @GetMapping("/photos/edit/{id}")
+    public String edit(@PathVariable Integer id, Model model){
+        try{
+            Photo photo = photoService.getById(id);
+            model.addAttribute("photo",photo);
+            return "/photos/edit";
+        }catch (Exception e){
+            throw new ResponseStatusException(HttpStatus.NOT_FOUND, "pizza with id" + id + " not found");
+        }
+    }
+
+    @PostMapping("/photos/edit/{id}")
+    public String editPhoto(@PathVariable Integer id, @Valid @ModelAttribute("photo") Photo formPhoto, BindingResult bindingResult, Model model){
+        try{
+            Photo updatePhoto = photoService.updatePhoto(formPhoto, id);
+            return "redirect:/";
+        }catch (Exception e){
+            throw new ResponseStatusException(HttpStatus.NOT_FOUND, "Photo with id" + id + " not found");
         }
     }
 }

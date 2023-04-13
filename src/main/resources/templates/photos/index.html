@@ -6,21 +6,22 @@
 </head>
 <body>
 <nav th:replace="~{/fragments/navbar :: navbar('index')}"></nav>
-<div class="container">
 <div class="container d-flex flex-wrap align-items-center">
     <div th:if="isVible" class="card mt-3 mx-2" style="width: 18rem;" th:each="photo : ${photos}">
         <img th:src="@{${photo.url}}" class="card-img-top" alt="...">
         <div class="card-body">
             <h5 class="card-title" th:text="${photo.title}"></h5>
             <p class="card-text" th:text="${photo.description}"></p>
-            <div class="d-flex">
+            <div class="d-flex align-items-center">
                 <a class="btn btn-primary" th:href="@{|/photos/${photo.id}|}"><i class="fa-regular fa-image"></i></a>
+                <a class="btn btn-warning mx-2" th:href="@{|/photos/edit/${photo.id}|}"><i class="fa-solid fa-pen-to-square"></i></a>
             </div>
         </div>
     </div>
 </div>
-    <hr>
-    <!--    AGGIUNTA NUOVE FOTO-->
+<hr>
+<!--    AGGIUNTA NUOVE FOTO-->
+<div class="container">
     <div class="card text-center mx-auto my-5">
         <div class="card-header">
             By Luigi G.
@@ -28,10 +29,11 @@
         <div class="card-body">
             <h5 class="card-title">Continua a sperimentare ed esplorare</h5>
             <p class="card-text">Salva tutte le tue foto in cloud</p>
-            <a th:href="@{/photos/create}" class="btn btn-primary">Aggiungi</a>
+            <a th:href="@{/photos/create}" class="btn btn-primary">Aggiungi altre foto</a>
         </div>
     </div>
 </div>
+
 
 <th:block th:replace="~{/fragments/navbar :: scripts}"></th:block>
 </body>
