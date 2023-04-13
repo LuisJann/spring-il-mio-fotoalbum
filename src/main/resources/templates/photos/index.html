@@ -5,14 +5,30 @@
     <title>Pizzas</title>
 </head>
 <body>
-<nav th:replace="~{/fragments/navbar :: navbar('photos')}"></nav>
+<nav th:replace="~{/fragments/navbar :: navbar('index')}"></nav>
 <div class="container">
-    <h1 class="mt-3 mx-auto">Photos</h1>
-    <div class="card mt-3" style="width: 18rem;" th:each="photo : ${photos}">
-        <img src="..." class="card-img-top" alt="...">
+<div class="container d-flex flex-wrap align-items-center">
+    <div th:if="isVible" class="card mt-3 mx-2" style="width: 18rem;" th:each="photo : ${photos}">
+        <img th:src="@{${photo.url}}" class="card-img-top" alt="...">
         <div class="card-body">
             <h5 class="card-title" th:text="${photo.title}"></h5>
             <p class="card-text" th:text="${photo.description}"></p>
+            <div class="d-flex">
+                <a class="btn btn-primary" th:href="@{|/photos/${photo.id}|}"><i class="fa-regular fa-image"></i></a>
+            </div>
+        </div>
+    </div>
+</div>
+    <hr>
+    <!--    AGGIUNTA NUOVE FOTO-->
+    <div class="card text-center mx-auto my-5">
+        <div class="card-header">
+            By Luigi G.
+        </div>
+        <div class="card-body">
+            <h5 class="card-title">Continua a sperimentare ed esplorare</h5>
+            <p class="card-text">Salva tutte le tue foto in cloud</p>
+            <a th:href="@{/photos/create}" class="btn btn-primary">Aggiungi</a>
         </div>
     </div>
 </div>

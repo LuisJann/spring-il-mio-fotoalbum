@@ -16,7 +16,6 @@ public class Photo {
     @NotBlank
     private String title;
     @NotBlank
-    @Lob
     private String description;
     private String url;
     @NotNull
@@ -67,11 +66,11 @@ public class Photo {
         this.url = url;
     }
 
-    public boolean isVisible() {
+    public boolean getIsVisible() {
         return isVisible;
     }
 
-    public void setVisible(boolean visible) {
+    public void setIsVisible(boolean visible) {
         isVisible = visible;
     }
 

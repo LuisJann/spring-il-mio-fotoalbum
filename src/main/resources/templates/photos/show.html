@@ -1,0 +1,20 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<th:block th:replace="/fragments/navbar :: resources"></th:block>
+<meta charset="UTF-8">
+<title>Show</title>
+</head>
+<body>
+<nav th:replace="~{/fragments/navbar :: navbar('show')}"></nav>
+
+<div class="container mt-5" th:object="${photo}">
+    <h1 th:text="*{title}"></h1>
+    <hr/>
+    <span th:text="*{description}"></span>
+    <hr>
+    <img th:src="@{*{url}}" th:alt="*{title}" class="w-100">
+</div>
+
+<th:block th:replace="~{/fragments/navbar :: scripts}"></th:block>
+</body>
+</html>
