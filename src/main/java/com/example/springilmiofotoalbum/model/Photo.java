@@ -5,6 +5,7 @@ import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.NotNull;
 
 import java.util.List;
+import java.util.Set;
 
 @Entity
 @Table(name = "photos")
@@ -22,9 +23,17 @@ public class Photo {
     private boolean isVisible;
 
 
-    @OneToMany(mappedBy = "photo")
-    private List<Category> categories;
+    @ManyToMany
+    @JoinTable(
+            name = "photo_category",
+            joinColumns = @JoinColumn(name = "photo_id"),
+            inverseJoinColumns = @JoinColumn(name = "category_id")
+    )
+    private Set<Category> categories;
 
+    public void setCategories(Set<Category> categories) {
+        this.categories = categories;
+    }
 
     public Integer getId() {
         return id;
@@ -67,10 +76,36 @@ public class Photo {
     }
 
     public List<Category> getCategories() {
-        return categories;
+        return (List<Category>) categories;
     }
 
     public void setCategories(List<Category> categories) {
-        this.categories = categories;
+        this.categories = (Set<Category>) categories;
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+
+        Photo photo = (Photo) o;
+
+        if (isVisible != photo.isVisible) return false;
+        if (!id.equals(photo.id)) return false;
+        if (!title.equals(photo.title)) return false;
+        if (!description.equals(photo.description)) return false;
+        if (!url.equals(photo.url)) return false;
+        return categories.equals(photo.categories);
+    }
+
+    @Override
+    public int hashCode() {
+        int result = id.hashCode();
+        result = 31 * result + title.hashCode();
+        result = 31 * result + description.hashCode();
+        result = 31 * result + url.hashCode();
+        result = 31 * result + (isVisible ? 1 : 0);
+        result = 31 * result + categories.hashCode();
+        return result;
     }
 }

@@ -13,10 +13,6 @@ public class Category {
     @NotBlank
     private String title;
 
-    @ManyToOne
-    @NotNull
-    private Photo photo;
-
     public Integer getId() {
         return id;
     }
@@ -33,11 +29,4 @@ public class Category {
         this.title = title;
     }
 
-    public Photo getPhoto() {
-        return photo;
-    }
-
-    public void setPhoto(Photo photo) {
-        this.photo = photo;
-    }
 }
