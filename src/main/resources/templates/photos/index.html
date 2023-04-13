@@ -6,16 +6,16 @@
 </head>
 <body class="bg-dark">
 <nav th:replace="~{/fragments/navbar :: navbar('index')}"></nav>
-<div class="container d-flex flex-wrap align-items-center">
+<div class="container d-flex flex-wrap justify-content-center">
     <div class="card mt-3 mx-2" style="width: 18rem;" th:each="photo : ${photos}">
         <img th:src="@{${photo.url}}" class="card-img-top" alt="...">
-        <div class="card-body">
-            <h5 class="card-title" th:text="${photo.title}"></h5>
+        <div class="card-body text-center">
+            <h3 class="card-title" th:text="${photo.title}"></h3>
             <p class="card-text" th:text="${photo.description}"></p>
-            <div class="d-flex align-items-center">
+            <div class="d-flex justify-content-center">
                 <a class="btn btn-primary" th:href="@{|/photos/${photo.id}|}"><i class="fa-regular fa-image"></i></a>
                 <a class="btn btn-warning mx-2" th:href="@{|/photos/edit/${photo.id}|}"><i class="fa-solid fa-pen-to-square"></i></a>
-                <a class="btn btn-danger mx-2" th:href="@{|/photos/delete/${photo.id}|}"><i class="fa-regular fa-trash-can"></i></a>
+                <a class="btn btn-danger" th:href="@{|/photos/delete/${photo.id}|}"><i class="fa-regular fa-trash-can"></i></a>
             </div>
         </div>
     </div>
