@@ -7,7 +7,7 @@
 <body>
 <nav th:replace="~{/fragments/navbar :: navbar('show')}"></nav>
 
-<div class="container mt-5" th:object="${photo}">
+<div class="container mt-5 pt-5" th:object="${photo}">
     <h1 th:text="*{title}"></h1>
     <hr/>
     <span th:text="*{description}"></span>

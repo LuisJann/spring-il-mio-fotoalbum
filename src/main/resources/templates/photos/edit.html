@@ -6,7 +6,7 @@
 </head>
 <body>
 <nav th:replace="~{/fragments/navbar :: navbar('index')}"></nav>
-<div class="container mt-5">
+<div class="container mt-5 pt-5">
     <form th:object="${photo}" method="post" th:action="@{|*{id}|}">
         <div class="mb-3">
             <label for="title" class="form-label">Inserisci il titolo della foto</label>
@@ -32,7 +32,7 @@
                 <label class="form-check-label" th:for="|category_${category.id}|" th:text="${category.title}"></label>
             </div>
         </div>
-        <button type="submit" class="btn btn-warning">Modifica</button>
+        <button type="submit" class="btn btn-warning">Invia</button>
     </form>
 </div>
 

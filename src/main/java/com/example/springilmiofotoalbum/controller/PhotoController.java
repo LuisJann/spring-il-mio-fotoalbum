@@ -27,9 +27,14 @@ public class PhotoController {
     private CategoryService categoryService;
 
     @GetMapping
-    public String index(Model model){
+    public String index(Model model, @RequestParam(name = "input") Optional<String> keyword){
         List<Photo> photos;
-        photos = photoService.getAllPhotos();
+        if (keyword.isPresent()){
+            photos = photoService.getFilteredPhoto(keyword.get());
+            model.addAttribute("keyword", keyword);
+        }else {
+            photos = photoService.getAllPhotos();
+        }
         model.addAttribute("photos", photos);
         return "photos/index";
     }

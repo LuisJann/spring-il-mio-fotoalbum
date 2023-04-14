@@ -31,4 +31,14 @@ public class CategoryService {
     public Category update(Category formCategory){
         return categoryRepository.save(formCategory);
     }
+
+    public boolean deleteById(Integer id) {
+        getById(id);
+        try {
+            categoryRepository.deleteById(id);
+            return true;
+        } catch (Exception e) {
+            return false;
+        }
+    }
 }

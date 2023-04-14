@@ -46,6 +46,10 @@ public class PhotoService {
         }
     }
 
+    public List<Photo> getFilteredPhoto(String keyword) {
+        return photoRepository.findByTitleContainingIgnoreCase(keyword);
+    }
+
     public Photo updatePhoto(Photo formPhoto, Integer id){
         Photo photoToUpdate = getById(id);
         photoToUpdate.setTitle(formPhoto.getTitle());
@@ -77,5 +81,7 @@ public class PhotoService {
         }
         return formCategories;
     }
+
+
 
 }

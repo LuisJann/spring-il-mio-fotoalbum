@@ -4,10 +4,12 @@
     <meta charset="UTF-8">
     <title>Pizzas</title>
 </head>
-<body class="bg-dark">
+<body class="bg-dark pt-5">
 <nav th:replace="~{/fragments/navbar :: navbar('index')}"></nav>
 <div class="container d-flex flex-wrap justify-content-center">
-    <div class="card mt-3 mx-2" style="width: 18rem;" th:each="photo : ${photos}">
+    <div class="card mt-5 mx-2" style="width: 18rem;" th:each="photo : ${photos}">
+        <div th:if="${photo.isVisible}" class="position-absolute top-0 end-0 bg-primary bg-gradient text-white me-2 mt-2 bg-opacity-50 p-1 rounded-circle"><i class="fa-solid fa-eye fs-4"></i></div>
+        <div th:unless="${photo.isVisible}" class="position-absolute top-0 end-0 bg-primary bg-gradient text-white me-2 mt-2 bg-opacity-50 p-1 rounded-circle"><i class="fa-solid fa-eye-slash fs-4"></i></div>
         <img th:src="@{${photo.url}}" class="card-img-top" th:alt="*{title}">
         <div class="card-body text-center">
             <h3 class="card-title" th:text="${photo.title}"></h3>
