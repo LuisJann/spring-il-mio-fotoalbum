@@ -23,4 +23,12 @@ public class CategoryService {
 
         return categoryRepository.save(categoryToCreate);
     }
+
+    public Category getById(Integer id){
+        return categoryRepository.findById(id).orElseThrow(()-> new RuntimeException());
+    }
+
+    public Category update(Category formCategory){
+        return categoryRepository.save(formCategory);
+    }
 }

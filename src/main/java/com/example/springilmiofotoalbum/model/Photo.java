@@ -4,6 +4,7 @@ import jakarta.persistence.*;
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.NotNull;
 
+import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
 
@@ -28,11 +29,8 @@ public class Photo {
             joinColumns = @JoinColumn(name = "photo_id"),
             inverseJoinColumns = @JoinColumn(name = "category_id")
     )
-    private Set<Category> categories;
+    private Set<Category> categories = new HashSet<>();
 
-    public void setCategories(Set<Category> categories) {
-        this.categories = categories;
-    }
 
     public Integer getId() {
         return id;
@@ -74,12 +72,12 @@ public class Photo {
         isVisible = visible;
     }
 
-    public List<Category> getCategories() {
-        return (List<Category>) categories;
+    public Set<Category> getCategories() {
+        return categories;
     }
 
-    public void setCategories(List<Category> categories) {
-        this.categories = (Set<Category>) categories;
+    public void setCategories(Set<Category> categories) {
+        this.categories = categories;
     }
 
     @Override

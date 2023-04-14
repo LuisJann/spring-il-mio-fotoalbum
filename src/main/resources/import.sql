@@ -3,3 +3,7 @@ INSERT INTO photos (title, description, url, is_visible) VALUES('Paesaggio', 'Fo
 
 
 INSERT INTO categories (title) VALUES('tramonti');
+INSERT INTO categories (title) VALUES('paesaggi');
+INSERT INTO categories (title) VALUES('natura');
+INSERT INTO categories (title) VALUES('city');
+INSERT INTO categories (title) VALUES('sport');

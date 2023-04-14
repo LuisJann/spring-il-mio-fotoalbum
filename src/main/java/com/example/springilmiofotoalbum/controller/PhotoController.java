@@ -3,6 +3,7 @@ package com.example.springilmiofotoalbum.controller;
 import com.example.springilmiofotoalbum.model.Photo;
 import com.example.springilmiofotoalbum.repository.CategoryRepository;
 import com.example.springilmiofotoalbum.repository.PhotoRepository;
+import com.example.springilmiofotoalbum.service.CategoryService;
 import com.example.springilmiofotoalbum.service.PhotoService;
 import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -23,7 +24,7 @@ public class PhotoController {
     @Autowired
     private PhotoService photoService;
     @Autowired
-    private CategoryRepository categoryRepository;
+    private CategoryService categoryService;
 
     @GetMapping
     public String index(Model model){
@@ -47,7 +48,8 @@ public class PhotoController {
     @GetMapping("/photos/create")
     public String create(Model model){
         model.addAttribute("photo", new Photo());
-        return "/photos/create";
+        model.addAttribute("categoryList", categoryService.getAll());
+        return "/photos/edit";
     }
 
     @PostMapping("/photos/create")
@@ -65,6 +67,7 @@ public class PhotoController {
         try{
             Photo photo = photoService.getById(id);
             model.addAttribute("photo",photo);
+            model.addAttribute("categoryList", categoryService.getAll());
             return "/photos/edit";
         }catch (Exception e){
             throw new ResponseStatusException(HttpStatus.NOT_FOUND, "pizza with id" + id + " not found");
@@ -73,6 +76,10 @@ public class PhotoController {
 
     @PostMapping("/photos/edit/{id}")
     public String editPhoto(@PathVariable Integer id, @Valid @ModelAttribute("photo") Photo formPhoto, BindingResult bindingResult, Model model){
+        if (bindingResult.hasErrors()){
+            model.addAttribute("categoryList", categoryService.getAll());
+            return "/photos/edit";
+        }
         try{
             Photo updatePhoto = photoService.updatePhoto(formPhoto, id);
             return "redirect:/";

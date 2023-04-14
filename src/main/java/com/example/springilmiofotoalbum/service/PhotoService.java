@@ -1,5 +1,6 @@
 package com.example.springilmiofotoalbum.service;
 
+import com.example.springilmiofotoalbum.model.Category;
 import com.example.springilmiofotoalbum.model.Photo;
 import com.example.springilmiofotoalbum.repository.PhotoRepository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -54,4 +55,5 @@ public class PhotoService {
             return false;
         }
     }
+
 }

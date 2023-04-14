@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<th:block th:replace="/fragments/navbar :: resources"></th:block>
+<meta charset="UTF-8">
+<title>Categories</title>
+</head>
+<body class="bg-dark">
+<nav th:replace="~{/fragments/navbar :: navbar('index')}"></nav>
+<div class="row mt-5 mx-auto">
+    <div class="col-6">
+        <ul class="list-group">
+            <li class="list-group-item d-flex justify-content-between" th:each="category : ${categories}">
+                <h5 class="fs-3" th:text="${category.title}"></h5>
+                <a class="btn btn-outline-info " th:href="@{/categories(id=${category.id})}">Edit</a>
+            </li>
+        </ul>
+    </div>
+
+
+    <div class="col-6">
+        <form
+                id="category-form"
+                method="post"
+                th:action="@{/categories/save}"
+                th:object="${categoryObj}"
+        >
+            <input type="hidden" th:field="*{id}">
+            <!-- name -->
+            <div class="col-12">
+                <label class="form-label text-white" for="title">Modifica o aggiungi una categoria</label>
+                <input type="text" id="title" class="form-control text-muted" th:field="*{title}">
+            </div>
+            <div class="col-12 mt-3">
+                <button type="submit" class="btn btn-primary">Save</button>
+            </div>
+        </form>
+
+<th:block th:replace="~{/fragments/navbar :: scripts}"></th:block>
+</body>
+</html>
