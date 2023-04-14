@@ -2,18 +2,24 @@ package com.example.springilmiofotoalbum.service;
 
 import com.example.springilmiofotoalbum.model.Category;
 import com.example.springilmiofotoalbum.model.Photo;
+import com.example.springilmiofotoalbum.repository.CategoryRepository;
 import com.example.springilmiofotoalbum.repository.PhotoRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
 
+import java.util.HashSet;
 import java.util.List;
 import java.util.Optional;
+import java.util.Set;
 
 @Service
 public class PhotoService {
     @Autowired
     PhotoRepository photoRepository;
+
+    @Autowired
+    CategoryRepository categoryRepository;
 
     public Photo createPhoto(Photo formPhoto){
         Photo photoToPersist = new Photo();
@@ -22,6 +28,8 @@ public class PhotoService {
         photoToPersist.setIsVisible(formPhoto.getIsVisible());
         photoToPersist.setUrl(formPhoto.getUrl());
 
+        Set<Category> formCategories = getPhotoCategory(formPhoto);
+        photoToPersist.setCategories(formCategories);
         return photoRepository.save(photoToPersist);
     }
 
@@ -44,6 +52,9 @@ public class PhotoService {
         photoToUpdate.setDescription(formPhoto.getDescription());
         photoToUpdate.setUrl(formPhoto.getUrl());
         photoToUpdate.setIsVisible(formPhoto.getIsVisible());
+
+        Set<Category> formCategories = getPhotoCategory(formPhoto);
+        photoToUpdate.setCategories(formCategories);
         return photoRepository.save(photoToUpdate);
     }
 
@@ -54,6 +65,17 @@ public class PhotoService {
         }catch (Exception e){
             return false;
         }
+    }
+
+    private Set<Category> getPhotoCategory(Photo formPhoto){
+        Set<Category> formCategories = new HashSet<>();
+        if (formPhoto.getCategories() != null){
+            for (Category category:
+                 formPhoto.getCategories()) {
+                formCategories.add(categoryRepository.findById(category.getId()).orElseThrow());
+            }
+        }
+        return formCategories;
     }
 
 }
