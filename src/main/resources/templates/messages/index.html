@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+<th:block th:replace="/fragments/navbar :: resources"></th:block>
+<meta charset="UTF-8">
+<title>Categories</title>
+</head>
+<body class="bg-dark">
+<nav th:replace="~{/fragments/navbar :: navbar('messages')}"></nav>
+<div class="conitainer mt-5 pt-3">
+    <h1 class="text-center text-primary mb-3">I tuoi messaggi</h1>
+    <div class="container">
+    <table class="table mx-auto mt-3 text-white" th:if="${messages.size} > 0">
+        <thead>
+        <tr>
+            <th scope="col">Email</th>
+            <th scope="col">Cognome</th>
+            <th scope="col">Nome</th>
+            <th scope="col">Messaggio</th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr th:each="message : ${messages}" th:object="${message}">
+            <th scope="row" th:text="*{email}"></th>
+            <td th:text="*{surname}"></td>
+            <td th:text="*{name}"></td>
+            <td th:text="*{message}"></td>
+        </tr>
+        </tbody>
+    </table>
+    </div>
+    <div th:if="${messages.size} <= 0" class="container d-flex justify-content-center flex-column text-white">
+        <div class="w-75 mx-auto mt-5">
+            <img class="w-100 rounded-circle" src="https://i.pinimg.com/originals/0e/c0/db/0ec0dbf1e9a008acb9955d3246970e15.gif" alt="">
+        </div>
+        <h2 class="text-center mt-5 mb-5">Non ci sono messaggi</h2>
+    </div>
+</div>
+
+
+
+<th:block th:replace="~{/fragments/navbar :: scripts}"></th:block>
+</body>
+</html>

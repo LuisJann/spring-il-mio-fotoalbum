@@ -16,3 +16,5 @@ INSERT INTO users (email, password, username) VALUES('admin@gmail.com', '{noop}a
 INSERT INTO roles (name) VALUES('ADMIN');
 
 INSERT INTO users_roles (user_id, roles_id) VALUES(1,1);
+
+--INSERT INTO messages (email, name, surname, message) VALUES('user@gmail.com', 'Paolo', 'Rossi', 'Ciao, belle foto complimenti!');

@@ -22,6 +22,9 @@
         <li class="nav-item">
           <a class="nav-link" th:classappend="${current == 'categories'} ? 'active' : ''" th:href="@{/categories}">Categories</a>
         </li>
+        <li class="nav-item">
+          <a class="nav-link" th:classappend="${current == 'messages'} ? 'active' : ''" th:href="@{/messages}">Messages</a>
+        </li>
       </ul>
       <form class="d-flex" role="search" th:action="@{/}" method="get">
         <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search"

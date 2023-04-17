@@ -21,6 +21,15 @@ public class PhotoService {
     @Autowired
     CategoryRepository categoryRepository;
 
+    public Photo findPhoto(Integer id) throws RuntimeException {
+        Optional<Photo> photo = photoRepository.findById(id);
+        if (photo.isPresent()) {
+            return photo.get();
+        } else {
+            throw new RuntimeException("Can't find photo with " + id + " id");
+        }
+    }
+
     public Photo createPhoto(Photo formPhoto){
         Photo photoToPersist = new Photo();
         photoToPersist.setTitle(formPhoto.getTitle());
